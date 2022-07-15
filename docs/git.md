@@ -40,3 +40,5 @@ git reset --hard HEAD@{2}  # go back to a specific history point
 ```
 
 ref: [undoing a git rebase](https://stackoverflow.com/questions/134882/undoing-a-git-rebase)
+
+[back](.././)
