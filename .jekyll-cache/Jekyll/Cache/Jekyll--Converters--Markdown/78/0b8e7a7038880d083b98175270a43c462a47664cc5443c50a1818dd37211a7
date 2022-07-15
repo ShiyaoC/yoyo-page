@@ -1,0 +1,18 @@
+I"È<h1 id="git-cheatsheet">Git Cheatsheet</h1>
+
+<h2 id="git-fetch-remote-log">GIT FETCH REMOTE LOG</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git log remotename/branchname
+</code></pre></div></div>
+
+<h2 id="git-merge-upstream">GIT MERGE UPSTREAM</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git fetch upstream
+git checkout main
+git merge upstream/main
+</code></pre></div></div>
+
+<h2 id="git-stash">GIT STASH</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git stash
+git stash pop
+git stash pop stash@{1}
+</code></pre></div></div>
+:ET
