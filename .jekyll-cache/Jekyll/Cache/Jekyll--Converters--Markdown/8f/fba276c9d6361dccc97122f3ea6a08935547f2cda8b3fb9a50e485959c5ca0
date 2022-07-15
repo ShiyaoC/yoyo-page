@@ -1,0 +1,35 @@
+I"²<h1 id="google-summer--of-code-notes">Google summer  of code notes</h1>
+
+<h2 id="early-june-week-1--week2">Early June (Week 1 &amp; Week2)</h2>
+<ol>
+  <li>Set up testing environment
+    <ul>
+      <li>Use the following commands to check which .so is linked
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>which pmseries
+ls -l /usr/local/lib
+ls -l /usr/lib/libpcp*
+ldd /usr/local/bin/pmseries
+</code></pre></div>        </div>
+        <p>and use</p>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib/libpcp_web.so.1
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/libpcp_web.so.1
+</code></pre></div>        </div>
+        <p>to link to the correct .so.1 file</p>
+        <h3 id="notes">Notes</h3>
+        <p>To run test:</p>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd qa\
+sudo ./check -g pmseries
+</code></pre></div>        </div>
+        <p>to run all pmseries tests, or use</p>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo ./check 1886
+</code></pre></div>        </div>
+        <p>to run a specific test.</p>
+        <h1 id="week-2">Week 2</h1>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h1 id="week-3">Week 3</h1>
+<p><a href="./">back</a></p>
+:ET
