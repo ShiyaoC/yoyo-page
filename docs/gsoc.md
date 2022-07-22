@@ -58,4 +58,14 @@ Checkout
 ## Early July (Week 5 & 6)
 1. Implemented operations for `topk_inst()` and `topk_sample()`.
 
+### Notes
+1. use `./new` to create a new qa tests under the qa folder.
+
+## Late July (Week 7 & 8)
+1. Implemented `nth_percentile_inst()` and `nth_percentile_inst()`.
+
+### Notes
+1. [HdrHistogram_c](https://github.com/HdrHistogram/HdrHistogram_c) provides examples for histogram function.
+HDR stands for high dynamic range.
+
 [back](.././)

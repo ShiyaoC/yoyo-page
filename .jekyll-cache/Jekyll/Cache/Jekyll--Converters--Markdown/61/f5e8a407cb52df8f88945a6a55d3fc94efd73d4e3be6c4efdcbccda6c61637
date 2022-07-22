@@ -1,4 +1,11 @@
-I"�<h1 id="google-summer--of-code-notes">Google summer  of code notes</h1>
+I"E<h1 id="google-summer--of-code-notes">Google summer  of code notes</h1>
+
+<h2 id="special-notes">Special notes</h2>
+<h3 id="what-if-qa-fails">What if qa fails</h3>
+<p>Before running <code class="language-plaintext highlighter-rouge">./check ...</code>, run <code class="language-plaintext highlighter-rouge">pmseries --load "{source.path: \"PATH/pcp/qa/archives/proc\"}"</code>.</p>
+<ul>
+  <li>If unable to connect to redis server with the error msg ‘Segmentation fault (core dumped)’, try to run <code class="language-plaintext highlighter-rouge">sudo make clean</code> and rebuild the project. This should solve the segmentation fault problem.</li>
+</ul>
 
 <h2 id="early-june-week-1--week2">Early June (Week 1 &amp; Week2)</h2>
 <ol>
@@ -64,5 +71,19 @@ Checkout
   <li>Implemented operations for <code class="language-plaintext highlighter-rouge">topk_inst()</code> and <code class="language-plaintext highlighter-rouge">topk_sample()</code>.</li>
 </ol>
 
-<p><a href=".././">back</a></p>
+<h3 id="notes-2">Notes</h3>
+<ol>
+  <li>use <code class="language-plaintext highlighter-rouge">./new</code> to create a new qa tests under the qa folder.</li>
+</ol>
+
+<h2 id="late-july-week-5--6">Late July (Week 5 &amp; 6)</h2>
+<ol>
+  <li>Implemented <code class="language-plaintext highlighter-rouge">nth_percentile_inst()</code> and <code class="language-plaintext highlighter-rouge">nth_percentile_inst()</code>.</li>
+</ol>
+
+<h3 id="notes-3">Notes</h3>
+<ol>
+  <li><a href="https://github.com/HdrHistogram/HdrHistogram_c">HdrHistogram_c</a> provides examples for histogram function.
+<a href=".././">back</a></li>
+</ol>
 :ET
