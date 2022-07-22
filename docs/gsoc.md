@@ -4,6 +4,11 @@ layout: default
 
 # Google summer  of code notes
 
+## Special notes
+### What if qa fails
+Before running `./check ...`, run `pmseries --load "{source.path: \"PATH/pcp/qa/archives/proc\"}"`.
+* If unable to connect to redis server with the error msg 'Segmentation fault (core dumped)', try to run `sudo make clean` and rebuild the project. This should solve the segmentation fault problem.
+
 ## Early June (Week 1 & Week2)
 1. Set up testing environment
 * Use the following commands to check which .so is linked
