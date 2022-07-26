@@ -1,0 +1,29 @@
+I"�<h1 id="redis-commands-notes">Redis Commands Notes</h1>
+
+<h2 id="keys-pattern">KEYS pattern</h2>
+<p><code class="language-plaintext highlighter-rouge">keys</code> command returns all keys matching pattern.
+For example, we can use 
+<code class="language-plaintext highlighter-rouge">keys pcp:*</code> to search for keys that matches the patter <code class="language-plaintext highlighter-rouge">pcp:</code>, where ‘*’ is a wildcard.</p>
+
+<p><a href="https://redis.io/commands/keys/">redis key command documentation</a></p>
+
+<h2 id="type-key">TYPE key</h2>
+<p><code class="language-plaintext highlighter-rouge">type</code> returns the string representation of the type of the value stored at key. The different types that can be returned are: string, list, set, zset, hash and stream.</p>
+
+<p>We can use the key returns from the previous command to get its type:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>type pcp:desc:series:5dea8102b229105e073edd6f8c36d56f9ddb97a8
+</code></pre></div></div>
+
+<p><a href="https://redis.io/commands/type/">redis type command documentation</a></p>
+
+<h2 id="smembers">smembers</h2>
+
+<p><a href="https://redis.io/commands/smembers/">redis smembers command documentatio</a></p>
+<h2 id="hgetall">hgetall</h2>
+
+<p><a href="https://redis.io/commands/smembers/">redis hgetall command documentatio</a></p>
+
+<h2 id="flushall">flushall</h2>
+
+<p><a href="https://redis.io/commands/smembers/">redis flushall command documentatio</a></p>
+:ET

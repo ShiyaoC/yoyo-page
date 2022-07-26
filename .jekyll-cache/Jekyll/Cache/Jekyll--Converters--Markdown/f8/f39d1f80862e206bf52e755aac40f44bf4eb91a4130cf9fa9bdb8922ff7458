@@ -1,61 +1,4 @@
-<!DOCTYPE html>
-<html lang="en-US">
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="/assets/css/style.css?v=" media="screen" type="text/css">
-    <link rel="stylesheet" href="/assets/css/print.css" media="print" type="text/css">
-
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <![endif]-->
-
-<!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Yoyo’s Blog</title>
-<meta name="generator" content="Jekyll v4.2.2" />
-<meta property="og:title" content="Yoyo’s Blog" />
-<meta property="og:locale" content="en_US" />
-<link rel="canonical" href="http://localhost:4000/docs/gsoc.html" />
-<meta property="og:url" content="http://localhost:4000/docs/gsoc.html" />
-<meta property="og:site_name" content="Yoyo’s Blog" />
-<meta property="og:type" content="website" />
-<meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Yoyo’s Blog" />
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","headline":"Yoyo’s Blog","url":"http://localhost:4000/docs/gsoc.html"}</script>
-<!-- End Jekyll SEO tag -->
-
-
-    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
-
-<!-- Setup Google Analytics -->
-
-
-
-<!-- You can set your favicon here -->
-<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
-
-<!-- end custom head snippets -->
-
-  </head>
-
-  <body>
-    <header>
-      <div class="inner">
-        <a href="http://localhost:4000/">
-          <h1>Yoyo's Blog</h1>
-        </a>
-        <h2></h2>
-        
-        
-      </div>
-    </header>
-
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <h1 id="google-summer--of-code-notes">Google summer  of code notes</h1>
+I"�<h1 id="google-summer--of-code-notes">Google summer  of code notes</h1>
 
 <h2 id="multi-hosts-monitoring-set-up">Multi-hosts monitoring set up</h2>
 <p>Follow <a href="https://pcp.readthedocs.io/en/latest/QG/RecordMetricsFromRemoteSystem.html">Record metrics from a remote system</a>
@@ -66,42 +9,46 @@ to set up the remote system (can be a virtual machine on the same computer).</p>
   <li>
     <p>use <code class="language-plaintext highlighter-rouge">sudo vi /etc/hosts</code> to edit the hosts on your machine and add the new system mapping to the file.</p>
   </li>
-  <li>go to <code class="language-plaintext highlighter-rouge">/etc/pcp/pmlogger</code>,
-    <ul>
-      <li>
-        <p>The control <code class="language-plaintext highlighter-rouge">file</code> contains one line per host to be logged.</p>
-      </li>
-      <li>
-        <p>The file <code class="language-plaintext highlighter-rouge">control.d</code> stores the config of each host</p>
-      </li>
-    </ul>
+  <li>
+    <p>go to <code class="language-plaintext highlighter-rouge">/etc/pcp/pmlogger</code>,
+ ** The control <code class="language-plaintext highlighter-rouge">file</code> contains one line per host to be logged.</p>
+
+    <p>** The file <code class="language-plaintext highlighter-rouge">control.d</code> stores the config of each host</p>
   </li>
-  <li>Copy the local file and give it a name for your remote system. set n to primary option, which means this remote system is not primary, and your local machine should be primary system.
-The arguments for the hosts are
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">-r</code>: creates the local config</li>
-      <li><code class="language-plaintext highlighter-rouge">-T</code>: terminating cycle</li>
-      <li><code class="language-plaintext highlighter-rouge">-c</code>: config file for pmlogger</li>
-      <li><code class="language-plaintext highlighter-rouge">-v</code>: volume size. Once the archieve meets the set volume, a new archieve will be created.</li>
-    </ul>
+  <li>
+    <p>Copy the local file and give it a name for your remote system. set n to primary option, which means this remote system is not primary, and your local machine should be primary system.</p>
   </li>
+</ol>
+
+<p>The arguments for the hosts are 
+** <code class="language-plaintext highlighter-rouge">-r</code>: creates the local config
+** <code class="language-plaintext highlighter-rouge">-T</code>: terminating cycle
+** <code class="language-plaintext highlighter-rouge">-c</code>: config file for pmlogger 
+** <code class="language-plaintext highlighter-rouge">-v</code>: volume size. Once the archieve meets the set volume, a new archieve will be created.</p>
+
+<ol>
   <li>
     <p>Use <code class="language-plaintext highlighter-rouge">sudo systemctl restart pmlogger</code> to restart pmlogger, and use
 <code class="language-plaintext highlighter-rouge">sudo systemctl status pmlogger</code> to check its status.</p>
   </li>
-  <li>Go to the dir <code class="language-plaintext highlighter-rouge">cd /var/log/pcp/pmlogger/shiyao_fedora</code> where stores the config of your second system to see details.
-    <ul>
-      <li>Files 20220726.15.27.* have all the metrics sent from redis. Once this file meets the set volume (the -v option), a new one with the same prefix will be created, and new data will be stored to the new files. and the old files will be compressed.</li>
-      <li>File 20220726.15.27.index is a lookup table for the previous files. It’s used for a quicker data query.</li>
-      <li>File 20220726.15.27.meta is the metadata from redis, it stores metric names, descriptors, labels and so on.</li>
-      <li>File Latest is a PCP archive folio</li>
-      <li>File pmlogger.log is created by -r option. It stores the query frequency for each metric.</li>
-    </ul>
+  <li>
+    <p>Go to the dir <code class="language-plaintext highlighter-rouge">cd /var/log/pcp/pmlogger/shiyao_fedora</code> where stores the config of your second system to see details.</p>
   </li>
+</ol>
+
+<p>** Files 20220726.15.27.* have all the metrics sent from redis. Once this file meets the set volume (the -v option), a new one with the same prefix will be created, and new data will be stored to the new files. and the old files will be compressed. 
+** File 20220726.15.27.index is a lookup table for the previous files. It’s used for a quicker data query.
+** File 20220726.15.27.meta is the metadata from redis, it stores metric names, descriptors, labels and so on.
+** File Latest is a PCP archive folio
+** File pmlogger.log is created by -r option. It stores the query frequency for each metric.</p>
+
+<ol>
   <li>
     <p>We can use <code class="language-plaintext highlighter-rouge">sudo systemctl stop pmproxy</code> to stop the new messages from redis, and use <code class="language-plaintext highlighter-rouge">sudo systemctl restart pmproxy</code> to restart the pmproxy and allow new messages from redis server.</p>
   </li>
-  <li>We can use <code class="language-plaintext highlighter-rouge">pmseries -a 805f4cdf368337dd564c365909543cc86a39275e</code> to see where the data come from (local or remote).</li>
+  <li>
+    <p>We can use <code class="language-plaintext highlighter-rouge">pmseries -a 805f4cdf368337dd564c365909543cc86a39275e</code> to see where the data come from (local or remote).</p>
+  </li>
 </ol>
 
 <h2 id="special-notes">Special notes</h2>
@@ -192,18 +139,4 @@ HDR stands for high dynamic range.</li>
 </ol>
 
 <p><a href=".././">back</a></p>
-
-        </section>
-
-        <aside id="sidebar">
-          
-
-          
-
-          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</p>
-        </aside>
-      </div>
-    </div>
-
-  </body>
-</html>
+:ET

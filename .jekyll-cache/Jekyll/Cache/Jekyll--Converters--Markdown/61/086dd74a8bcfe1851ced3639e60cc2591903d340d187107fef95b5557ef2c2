@@ -1,4 +1,51 @@
-I"M<h1 id="google-summer--of-code-notes">Google summer  of code notes</h1>
+I"8<h1 id="google-summer--of-code-notes">Google summer  of code notes</h1>
+
+<h2 id="multi-hosts-monitoring-set-up">Multi-hosts monitoring set up</h2>
+<p>Follow <a href="https://pcp.readthedocs.io/en/latest/QG/RecordMetricsFromRemoteSystem.html">Record metrics from a remote system</a>
+to set up the remote system (can be a virtual machine on the same computer).</p>
+
+<p>On your local host,</p>
+<ol>
+  <li>
+    <p>use <code class="language-plaintext highlighter-rouge">sudo vi /etc/hosts</code> to edit the hosts on your machine and add the new system mapping to the file.</p>
+  </li>
+  <li>go to <code class="language-plaintext highlighter-rouge">/etc/pcp/pmlogger</code>,
+    <ul>
+      <li>
+        <p>The control <code class="language-plaintext highlighter-rouge">file</code> contains one line per host to be logged.</p>
+      </li>
+      <li>
+        <p>The file <code class="language-plaintext highlighter-rouge">control.d</code> stores the config of each host</p>
+      </li>
+    </ul>
+  </li>
+  <li>Copy the local file and give it a name for your remote system. set n to primary option, which means this remote system is not primary, and your local machine should be primary system.
+The arguments for the hosts are
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">-r</code>: creates the local config</li>
+      <li><code class="language-plaintext highlighter-rouge">-T</code>: terminating cycle</li>
+      <li><code class="language-plaintext highlighter-rouge">-c</code>: config file for pmlogger</li>
+      <li><code class="language-plaintext highlighter-rouge">-v</code>: volume size. Once the archieve meets the set volume, a new archieve will be created.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Use <code class="language-plaintext highlighter-rouge">sudo systemctl restart pmlogger</code> to restart pmlogger, and use
+<code class="language-plaintext highlighter-rouge">sudo systemctl status pmlogger</code> to check its status.</p>
+  </li>
+  <li>Go to the dir <code class="language-plaintext highlighter-rouge">cd /var/log/pcp/pmlogger/shiyao_fedora</code> where stores the config of your second system to see details.
+    <ul>
+      <li>Files 20220726.15.27.* have all the metrics sent from redis. Once this file meets the set volume (the -v option), a new one with the same prefix will be created, and new data will be stored to the new files. and the old files will be compressed.</li>
+      <li>File 20220726.15.27.index is a lookup table for the previous files. It’s used for a quicker data query.</li>
+      <li>File 20220726.15.27.meta is the metadata from redis, it stores metric names, descriptors, labels and so on.</li>
+      <li>File Latest is a PCP archive folio</li>
+      <li>File pmlogger.log is created by -r option. It stores the query frequency for each metric.</li>
+    </ul>
+  </li>
+  <li>
+    <p>We can use <code class="language-plaintext highlighter-rouge">sudo systemctl stop pmproxy</code> to stop the new messages from redis, and use <code class="language-plaintext highlighter-rouge">sudo systemctl restart pmproxy</code> to restart the pmproxy and allow new messages from redis server.</p>
+  </li>
+  <li>We can use <code class="language-plaintext highlighter-rouge">pmseries -a 805f4cdf368337dd564c365909543cc86a39275e</code> to see where the data come from (local or remote).</li>
+</ol>
 
 <h2 id="special-notes">Special notes</h2>
 <h3 id="what-if-qa-fails">What if qa fails</h3>
@@ -76,14 +123,15 @@ Checkout
   <li>use <code class="language-plaintext highlighter-rouge">./new</code> to create a new qa tests under the qa folder.</li>
 </ol>
 
-<h2 id="late-july-week-5--6">Late July (Week 5 &amp; 6)</h2>
+<h2 id="late-july-week-7--8">Late July (Week 7 &amp; 8)</h2>
 <ol>
   <li>Implemented <code class="language-plaintext highlighter-rouge">nth_percentile_inst()</code> and <code class="language-plaintext highlighter-rouge">nth_percentile_inst()</code>.</li>
 </ol>
 
 <h3 id="notes-3">Notes</h3>
 <ol>
-  <li><a href="https://github.com/HdrHistogram/HdrHistogram_c">HdrHistogram_c</a> provides examples for histogram function.</li>
+  <li><a href="https://github.com/HdrHistogram/HdrHistogram_c">HdrHistogram_c</a> provides examples for histogram function.
+HDR stands for high dynamic range.</li>
 </ol>
 
 <p><a href=".././">back</a></p>

@@ -4,6 +4,39 @@ layout: default
 
 # Google summer  of code notes
 
+
+## Multi-hosts monitoring set up
+Follow [Record metrics from a remote system](https://pcp.readthedocs.io/en/latest/QG/RecordMetricsFromRemoteSystem.html)
+to set up the remote system (can be a virtual machine on the same computer).
+
+On your local host, 
+1. use `sudo vi /etc/hosts` to edit the hosts on your machine and add the new system mapping to the file.
+
+2. go to `/etc/pcp/pmlogger`,
+    * The control `file` contains one line per host to be logged.
+
+    * The file `control.d` stores the config of each host
+
+3. Copy the local file and give it a name for your remote system. set n to primary option, which means this remote system is not primary, and your local machine should be primary system.
+The arguments for the hosts are 
+* `-r`: creates the local config
+* `-T`: terminating cycle
+* `-c`: config file for pmlogger 
+* `-v`: volume size. Once the archieve meets the set volume, a new archieve will be created.
+
+4. Use `sudo systemctl restart pmlogger` to restart pmlogger, and use
+`sudo systemctl status pmlogger` to check its status.
+
+5. Go to the dir `cd /var/log/pcp/pmlogger/shiyao_fedora` where stores the config of your second system to see details.
+* Files 20220726.15.27.* have all the metrics sent from redis. Once this file meets the set volume (the -v option), a new one with the same prefix will be created, and new data will be stored to the new files. and the old files will be compressed. 
+* File 20220726.15.27.index is a lookup table for the previous files. It's used for a quicker data query.
+* File 20220726.15.27.meta is the metadata from redis, it stores metric names, descriptors, labels and so on.
+* File Latest is a PCP archive folio
+* File pmlogger.log is created by -r option. It stores the query frequency for each metric.
+6. We can use `sudo systemctl stop pmproxy` to stop the new messages from redis, and use `sudo systemctl restart pmproxy` to restart the pmproxy and allow new messages from redis server.
+
+7. We can use `pmseries -a 805f4cdf368337dd564c365909543cc86a39275e` to see where the data come from (local or remote).
+
 ## Special notes
 ### What if qa fails
 Before running `./check ...`, run `pmseries --load "{source.path: \"PATH/pcp/qa/archives/proc\"}"`.

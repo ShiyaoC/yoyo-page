@@ -8,3 +8,5 @@ layout: default
 Link to the project github page: [https://github.com/performancecopilot/pcp](https://github.com/performancecopilot/pcp).
 
 # [Git Notes](./docs/git.html)
+
+# [Redis Notes](./docs/redis.html)
