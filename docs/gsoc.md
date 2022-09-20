@@ -37,11 +37,6 @@ The arguments for the hosts are
 
 7. We can use `pmseries -a 805f4cdf368337dd564c365909543cc86a39275e` to see where the data come from (local or remote).
 
-## Special notes
-### What if qa fails
-Before running `./check ...`, run `pmseries --load "{source.path: \"PATH/pcp/qa/archives/proc\"}"`.
-* If unable to connect to redis server with the error msg 'Segmentation fault (core dumped)', try to run `sudo make clean` and rebuild the project. This should solve the segmentation fault problem.
-
 ## Early June (Week 1 & Week2)
 1. Set up testing environment
 * Use the following commands to check which .so is linked
@@ -72,7 +67,7 @@ to link to the correct .so.1 file
 1. Implemented time domain operation: `sum_sample()` and `avg_sample()`
 2. Implemented time domain and instance domain operations for standard deviation, i.e. `stdev_inst()` and `stdev_sample()`.
 ### Notes
-1. Remember to update 
+* Remember to update 
 ```
 np->value_set.series_values[i].series_desc.type
 np->value_set.series_values[i].series_desc.semantics
@@ -82,7 +77,7 @@ if any operation is done to the original redis data.
 Checkout 
 [pmSemStr](https://man7.org/linux/man-pages/man3/pmsemstr.3.html) and
 [pmUnitsStr](https://man7.org/linux/man-pages/man3/pmUnitsStr.3.html) for more information.
-2. Try to test on multi-host environment: 
+* Try to test on multi-host environment: 
 [Record metrics from a remote system](https://pcp.readthedocs.io/en/latest/QG/RecordMetricsFromRemoteSystem.html)
 
 ## Early July (Week 5 & 6)
@@ -93,9 +88,9 @@ Checkout
 ## Late July (Week 7 & 8)
 1. Implemented `nth_percentile_inst()` and `nth_percentile_inst()`.
 ### Notes
-1. [HdrHistogram_c](https://github.com/HdrHistogram/HdrHistogram_c) provides examples for histogram function.
+* [HdrHistogram_c](https://github.com/HdrHistogram/HdrHistogram_c) provides examples for histogram function.
 HDR stands for high dynamic range.
-2. [bpftrace](https://bpftrace.org/) provides examples of histogram output.
+* [bpftrace](https://bpftrace.org/) provides examples of histogram output.
 
 ## Early August (Week 9)
 1. Implemented scalar multiplication and its tests
@@ -103,12 +98,17 @@ HDR stands for high dynamic range.
 
 ## Early September (Week 10 & 11)
 1. Understood callback for creating histogram bar chart.
-* pcp/src/include/pcp/pmwebapi.h: add a structure to store histogram values
-* pcp/src/pmseries/pmseries.c: add call back for on_histogram_value
+* pcp/src/include/pcp/pmwebapi.h: added a structure to store histogram values.
+* pcp/src/pmseries/pmseries.c: added call back for on_histogram_value.
 ### Notes
-1. Try to use HdrHistogram and it can be one of the vendors for pcp.
+* Try to use HdrHistogram and it can be one of the vendors for pcp.
 
 ## Late September (12 & 13)
 
+
+## Special notes
+### What if qa fails
+Before running `./check ...`, run `pmseries --load "{source.path: \"PATH/pcp/qa/archives/proc\"}"`.
+* If unable to connect to redis server with the error msg 'Segmentation fault (core dumped)', try to run `sudo make clean` and rebuild the project. This should solve the segmentation fault problem.
 
 [back](.././)
