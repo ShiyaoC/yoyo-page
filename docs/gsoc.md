@@ -100,5 +100,19 @@ Checkout
 ### Notes
 1. [HdrHistogram_c](https://github.com/HdrHistogram/HdrHistogram_c) provides examples for histogram function.
 HDR stands for high dynamic range.
+2. [bpftrace](https://bpftrace.org/) provides examples of histogram output.
+
+## Early August (Week 9)
+1. Implemented scalar multiplication and its tests
+* Note: does not have overflow handling. Current method is to report error when overflow occurs.
+## Early September (Week 10 & 11)
+1. Understood callback for creating histogram bar chart.
+* pcp/src/include/pcp/pmwebapi.h: add a structure to store histogram values
+* pcp/src/pmseries/pmseries.c: add call back for on_histogram_value
+
+### Notes
+1. Try to use HdrHistogram and it can be one of the vendors for pcp.
+## Late September (12 & 13)
+
 
 [back](.././)
