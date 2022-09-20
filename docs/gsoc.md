@@ -58,8 +58,6 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/libpcp_web.so.1
 ```
 to link to the correct .so.1 file
 2. finsed time domain operations for `min()` and `max()` functions
-
-
 ### Notes
 1. Use `sudo ./check -g pmseries` to run all pmseries tests, or use `sudo ./check 1886`to run a specific test.
 
@@ -73,7 +71,6 @@ to link to the correct .so.1 file
 ## Late June (Week 3 & Week4)
 1. Implemented time domain operation: `sum_sample()` and `avg_sample()`
 2. Implemented time domain and instance domain operations for standard deviation, i.e. `stdev_inst()` and `stdev_sample()`.
-
 ### Notes
 1. Remember to update 
 ```
@@ -90,13 +87,11 @@ Checkout
 
 ## Early July (Week 5 & 6)
 1. Implemented operations for `topk_inst()` and `topk_sample()`.
-
 ### Notes
 1. use `./new` to create a new qa tests under the qa folder.
 
 ## Late July (Week 7 & 8)
 1. Implemented `nth_percentile_inst()` and `nth_percentile_inst()`.
-
 ### Notes
 1. [HdrHistogram_c](https://github.com/HdrHistogram/HdrHistogram_c) provides examples for histogram function.
 HDR stands for high dynamic range.
@@ -105,13 +100,14 @@ HDR stands for high dynamic range.
 ## Early August (Week 9)
 1. Implemented scalar multiplication and its tests
 * Note: does not have overflow handling. Current method is to report error when overflow occurs.
+
 ## Early September (Week 10 & 11)
 1. Understood callback for creating histogram bar chart.
 * pcp/src/include/pcp/pmwebapi.h: add a structure to store histogram values
 * pcp/src/pmseries/pmseries.c: add call back for on_histogram_value
-
 ### Notes
 1. Try to use HdrHistogram and it can be one of the vendors for pcp.
+
 ## Late September (12 & 13)
 
 
