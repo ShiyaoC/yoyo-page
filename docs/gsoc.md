@@ -4,6 +4,22 @@ layout: default
 
 # Google summer  of code notes
 
+Performance Co-Pilot timeseries are series of time-stamped values gathered from hosts making performance
+data available. With pmseries query, users can obtain various information about performance
+metrics in real time or from historical data. The existing pmseries query language implementation is
+maturing. However, there are still some important query grammar and functions needed to be added. This
+proposal aims to extend some time series functions in the `libpcp_web` module, including extending the
+grammar to support scalar operands in expressions, extending the cross-domain operations, implementing
+new statistical functions, and implementing new functions for time series sample matching.
+
+## Pull Request
+* Time domain operation for max [PR #1611](https://github.com/performancecopilot/pcp/pull/1611)
+* libpcp_web: add pmseries time domain functions [PR #1623](https://github.com/performancecopilot/pcp/pull/1623)
+* libpcp_web: solve memory leak [PR #1628](https://github.com/performancecopilot/pcp/pull/1628)
+* libpcp_web: modify libpcp_web make file [PR #1630](https://github.com/performancecopilot/pcp/pull/1630)
+* libpcp_web: Pmseries nth percentile [PR #1637](https://github.com/performancecopilot/pcp/pull/1637)
+* libpcp_web: pmseries language extensions with topk functions [PR #1638](https://github.com/performancecopilot/pcp/pull/1638)
+* pmseries: scalar multiplication [PR #1681](https://github.com/performancecopilot/pcp/pull/1681)
 
 ## Multi-hosts monitoring set up
 Follow [Record metrics from a remote system](https://pcp.readthedocs.io/en/latest/QG/RecordMetricsFromRemoteSystem.html)
@@ -110,5 +126,34 @@ HDR stands for high dynamic range.
 ### What if qa fails
 Before running `./check ...`, run `pmseries --load "{source.path: \"PATH/pcp/qa/archives/proc\"}"`.
 * If unable to connect to redis server with the error msg 'Segmentation fault (core dumped)', try to run `sudo make clean` and rebuild the project. This should solve the segmentation fault problem.
+
+
+## Early October (14 & 15)
+1. Implemented histogram() function: created a new callback structure to send histogram data.
+2. Understand the timeseries sample matching problem, and create graphs to see metric data trends.
+
+## Special notes
+Change time period of a metric:
+1. go to /var/lib/pcp/config/pmlogger/config.default
+2. add a section for the metric with new period, such as
+```
+log advisory on 2sec {
+    disk.all.read
+}
+```
+By doing so, the report period of `disk.all.read` will be change to 2 seconds instead of 10 seconds.
+
+## Late October (16 & 17)
+1. Designed algorithm to do upsampling and interpolations of vector operands to match timeseries samples with other vector operands.
+
+
+## Special notes
+1. Figured out the usages of two `timing_t` in both `node_t` and `series_t` structures.
+    * `timing_t` in `node_t` is the time periods (`delta\interval` in the pcp time series query expression) for the series root node.
+    * `timing_t` in `series_t` is the time intervals for each child roots.
+
+## TODO: After GSOC
+1. Keep implementing the Timeseries Sample Matching Function.
+2. Solve some memory leak problems.
 
 [back](.././)
